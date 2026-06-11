@@ -1,17 +1,17 @@
-# ☁️ AQI Predictor API (Stateless Backend)
+# AQI Predictor API (Stateless Backend)
 
 Repository ini berisi backend API untuk memprediksi Kualitas Udara (AQI - Air Quality Index) Jakarta menggunakan model Machine Learning (**Multiple Linear Regression**). 
 
 Backend ini bersifat **stateless (tanpa menyimpan state / tidak melakukan koneksi luar)**. Semua tugas pemanggilan API satelit Open-Meteo dialihkan langsung ke **Frontend (Client-side)**. Backend hanya menerima parameter cuaca matang dari frontend, melakukan standarisasi data, menghitung prediksi menggunakan file model (`mlr_aqi_model.pkl` & `scaler_cuaca.pkl`), dan mengembalikan hasil estimasi AQI.
 
-### 🌟 Keuntungan Arsitektur Ini:
+### Keuntungan Arsitektur Ini:
 1. **Bebas Error SSL/Koneksi**: Server backend Anda di Render tidak akan pernah mengalami error koneksi satelit atau masalah verifikasi sertifikat SSL HTTPS.
 2. **Terhindar dari Rate Limit**: Pemanggilan API Open-Meteo dilakukan dari browser masing-masing pengguna (IP client berbeda-beda), sehingga IP server backend Anda aman dari pemblokiran/rate-limiting.
 3. **Sangat Cepat**: Proses kalkulasi lokal hanya memakan waktu milidetik.
 
 ---
 
-## 🚀 Panduan Memulai Secara Lokal
+## Panduan Memulai Secara Lokal
 
 ### Prasyarat
 * Python 3.10 ke atas sudah terinstal di komputer Anda.
@@ -43,10 +43,10 @@ Backend ini bersifat **stateless (tanpa menyimpan state / tidak melakukan koneks
 
 ---
 
-## 📖 Dokumentasi API (Untuk Frontend)
+## Dokumentasi API (Untuk Frontend)
 
 * **Base URL (Local)**: `http://127.0.0.1:8000`
-* **Base URL (Production)**: `https://<nama-aplikasi-anda>.onrender.com`
+* **Base URL (Production)**: `https://aqibe.onrender.com`
 
 ### 1. Health Check
 * **Method**: `GET`
@@ -89,7 +89,7 @@ Menerima parameter cuaca lengkap dan mengembalikan perkiraan nilai AQI.
 
 ---
 
-## 💻 Panduan Integrasi Lengkap untuk Frontend Developer
+## Panduan Integrasi Lengkap untuk Frontend Developer
 
 Sebagai Frontend Developer, Anda perlu melakukan dua langkah berikut di aplikasi web Anda (Next.js, React, Vue, atau Vanilla JS):
 
@@ -183,7 +183,7 @@ Kirim data cuaca matang hasil langkah 1 ke backend API Anda:
 
 ```javascript
 async function prediksiAqiBesok(tanggalAcuan) {
-  const BACKEND_URL = "https://<nama-aplikasi-anda>.onrender.com/api/predict";
+  const BACKEND_URL = "https://aqibe.onrender.com/api/predict";
   
   // 1. Ambil data dari satelit Open-Meteo
   const dataCuaca = await dapatkanDataSatelit(tanggalAcuan);
@@ -212,20 +212,20 @@ prediksiAqiBesok("2026-06-11");
 
 ---
 
-## 🛠️ Konfigurasi CORS (Cross-Origin Resource Sharing)
+## Konfigurasi CORS (Cross-Origin Resource Sharing)
 
-Agar frontend dapat memanggil backend, daftarkan domain frontend Anda pada variabel `origins` di file **[app.py](file:///mnt/data/UserFiles/Documents/KULIAH/TUGAS%20SEM%204/AI/AQIBE/app.py)** sebelum mem-push ke Render:
+Agar frontend dapat memanggil backend, daftarkan domain frontend Anda pada variabel `origins` di file **app.py sebelum mem-push ke Render:
 
 ```python
 origins = [
     "http://localhost:3000",                  # Next.js lokal
-    "https://nama-proyekmu.vercel.app",       # Ganti dengan domain Vercel Anda
+    "https://jakarta-aqi.vercel.app",       # Ganti dengan domain Vercel Anda
 ]
 ```
 
 ---
 
-## ☁️ Deployment di Render.com
+## Deployment di Render.com
 
 Gunakan pengaturan berikut di dashboard Render Anda:
 * **Environment/Runtime**: `Python`

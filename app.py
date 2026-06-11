@@ -14,7 +14,7 @@ app = FastAPI(
 # Sesuaikan origins dengan URL frontend Anda (misal Vercel)
 origins = [
     "http://localhost:3000",                  # Untuk testing Next.js lokal
-    "https://nama-proyekmu.vercel.app",       # Ganti dengan URL Vercel asli Anda
+    "https://jakarta-aqi.vercel.app",       # Vercel
 ]
 
 app.add_middleware(
