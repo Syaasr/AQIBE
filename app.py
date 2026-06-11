@@ -4,6 +4,28 @@ import joblib
 import requests
 from datetime import datetime, timedelta
 
+from fastapi import FastAPI, BaseModel
+from fastapi.middleware.cors import CORSMiddleware # Tambahkan import ini
+import joblib
+import pandas as pd
+
+app = FastAPI()
+
+# --- KONFIGURASI CORS ---
+# Masukkan URL Vercel milikmu dan URL localhost untuk testing
+origins = [
+    "http://localhost:3000",                  # Untuk testing Next.js lokal
+    "https://nama-proyekmu.vercel.app",       # Ubah dengan URL Vercel asli nanti
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,           # Mengizinkan frontend di atas untuk mengakses API
+    allow_credentials=True,
+    allow_methods=["*"],             # Mengizinkan semua jenis HTTP Request (POST, GET, dll)
+    allow_headers=["*"],             # Mengizinkan semua HTTP Headers
+)
+
 # ==========================================
 # 1. LOAD MODEL DAN SCALER
 # ==========================================
