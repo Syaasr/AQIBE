@@ -1,5 +1,6 @@
-streamlit 
-scikit-learn
-pandas 
-joblib 
+fastapi
+uvicorn
+scikit-learn==1.6.1
+pandas
+joblib
 requests
